@@ -1,0 +1,8 @@
+:root {
+    --primary-color: #2f0139;
+    --secondary-color: #2a0132;
+    --highlight-color: #ff00ff;
+    --text-color: #fff;
+    --button-color: #692119;
+    --hover-effect: radial-gradient(circle, #ff00ff, transparent);
+}
