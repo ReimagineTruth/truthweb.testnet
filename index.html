@@ -1,364 +1,344 @@
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Truth Web</title>
+  <head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>TruthWeb - Reimagine Truth</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"/>
     <style>
-        .dark-mode {
-            --bg-color: #000;
-            --text-color: #fff;
-            --icon-bg-color: #2d3748;
-            --border-color: #4a5568;
-            --hover-bg-color: #4a5568;
+      :root {
+        --primary-color: #2f0139; /* Dark Violet */
+        --secondary-color: #2a0132; /* Deep Black */
+        --highlight-color: #ff00ff; /* Enhanced Bright Violet */
+        --text-color: #fff; /* White */
+        --button-color: #692119; /* Button Color */
+        --hover-effect: radial-gradient(circle, #ff00ff, transparent);
+      }
+      body {
+        background: #1a0120;
+        color: var(--text-color);
+        font-family: 'Poppins', sans-serif;
+        overflow-x: hidden;
+      }
+      .hero {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        border: 2px solid var(--highlight-color);
+        padding: 1rem;
+      }
+      .hero::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--hover-effect);
+        opacity: 0.2;
+        animation: float 6s infinite ease-in-out;
+      }
+      @keyframes float {
+        0%, 100% {
+          transform: translateY(0);
         }
-        .light-mode {
-            --bg-color: #fff;
-            --text-color: #000;
-            --icon-bg-color: #e2e8f0;
-            --border-color: #cbd5e0;
-            --hover-bg-color: #cbd5e0;
+        50% {
+          transform: translateY(-20px);
         }
-        .icon-container {
-            transition: transform 0.3s ease, background-color 0.3s ease;
+      }
+      .glow-text {
+        font-size: 2rem;
+        font-weight: bold;
+        text-shadow: 0 0 10px var(--highlight-color), 0 0 20px var(--highlight-color), 0 0 30px var(--highlight-color);
+        animation: glow 2s infinite alternate;
+      }
+      @keyframes glow {
+        0% {
+          text-shadow: 0 0 10px var(--highlight-color), 0 0 20px var(--highlight-color), 0 0 30px var(--highlight-color);
         }
-        .icon-container:hover, .icon-container:focus {
-            transform: scale(1.1);
-            background-color: var(--hover-bg-color);
+        100% {
+          text-shadow: 0 0 20px var(--highlight-color), 0 0 30px var(--highlight-color), 0 0 40px var(--highlight-color);
         }
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+      }
+      .card {
+        background: var(--primary-color);
+        border: 2px solid var(--highlight-color);
+        border-radius: 10px;
+        padding: 1rem;
+        box-shadow: 0 0 15px var(--highlight-color);
+        transition: transform 0.3s, box-shadow 0.3s;
+        animation: fadeInUp 1s ease-in-out;
+      }
+      .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 0 25px var(--highlight-color);
+      }
+      @keyframes fadeInUp {
+        0% {
+          opacity: 0;
+          transform: translateY(20px);
         }
-        @keyframes bounceIn {
-            0%, 20%, 40%, 60%, 80%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
         }
-        .fade-in {
-            animation: fadeIn 2s ease-in-out;
+      }
+      .btn {
+        background: var(--button-color);
+        color: var(--text-color);
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: background 0.3s;
+        animation: pulse 2s infinite;
+      }
+      .btn:hover {
+        background: var(--primary-color);
+      }
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
         }
-        .bounce-in {
-            animation: bounceIn 1s ease-in-out;
+        50% {
+          transform: scale(1.05);
         }
-        .logo-text {
-            font-size: 1.5rem; /* Default size */
-            transition: font-size 0.3s ease;
+        100% {
+          transform: scale(1);
         }
-        @media (min-width: 640px) {
-            .logo-text {
-                font-size: 2rem; /* Resize for larger screens */
-            }
+      }
+      footer {
+        background: var(--primary-color);
+        color: var(--text-color);
+        text-align: center;
+        padding: 1rem;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      .sticky-header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: var(--primary-color);
+        transition: background 0.3s, box-shadow 0.3s;
+      }
+      .sticky-header.scrolled {
+        background: var(--secondary-color);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+      }
+      .logo-text {
+        font-size: 1.5rem;
+        font-weight: 700;
+        transition: font-size 0.3s;
+      }
+      .logo-text.scrolled {
+        font-size: 1.25rem;
+      }
+      .nav-item {
+        transition: transform 0.3s;
+      }
+      .nav-item:hover {
+        transform: scale(1.1);
+      }
+      .fade-in {
+        opacity: 0;
+        animation: fadeIn 1s forwards;
+      }
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
         }
-        .drawer {
-            transform: translateX(-100%);
-            transition: transform 0.3s ease-in-out;
+      }
+      .slide-in {
+        transform: translateX(-100%);
+        animation: slideIn 1s forwards;
+      }
+      @keyframes slideIn {
+        to {
+          transform: translateX(0);
         }
-        .drawer-open {
-            transform: translateX(0);
-        }
-        .right-drawer {
-            transform: translateX(100%);
-            transition: transform 0.3s ease-in-out;
-        }
-        .right-drawer-open {
-            transform: translateX(0);
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 50;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-        }
-        .modal-content {
-            background-color: #fefefe;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 500px;
-            border-radius: 10px;
-            color: black;
-            font-family: 'Open Sans', sans-serif;
-        }
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        .menu-item {
-            transition: transform 0.3s ease, background-color 0.3s ease;
-        }
-        .menu-item:hover, .menu-item:focus {
-            transform: scale(1.1);
-            background-color: var(--hover-bg-color);
-        }
-        .search-bar {
-            transition: width 0.3s ease-in-out;
-        }
-        .search-bar:focus {
-            width: 16rem; /* 64 */
-        }
-        .icon {
-            transition: transform 0.3s ease;
-        }
-        .icon:hover, .icon:focus {
-            transform: scale(1.1);
-        }
-        .breadcrumb {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .breadcrumb a {
-            color: var(--text-color);
-            text-decoration: none;
-        }
-        .breadcrumb a:hover {
-            text-decoration: underline;
-        }
-        .loading-spinner {
-            border: 4px solid rgba(0, 0, 0, 0.1);
-            border-left-color: var(--text-color);
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
+      }
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+      .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 500px;
+        border-radius: 10px;
+      }
+      .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+      .close:hover,
+      .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
     </style>
-</head>
-<body class="bg-[var(--bg-color)] text-[var(--text-color)] flex flex-col items-center justify-center min-h-screen transition-colors duration-300 dark-mode">
-    <!-- Navigation Header -->
-    <div class="fixed top-0 left-0 right-0 bg-[var(--bg-color)] text-[var(--text-color)] flex justify-between items-center h-16 px-4 transition-colors duration-300 dark-mode">
-        <div class="flex items-center">
-            <button id="menuButton" class="text-[var(--text-color)] mr-4 icon">
-                <i class="fas fa-bars text-xl sm:text-2xl"></i>
-            </button>
-            <a href="home.html" class="text-[var(--text-color)] mr-4 flex items-center">
-                <span class="logo-text ml-2">TruthWeb</span>
-            </a>
-        </div>
-        <div class="hidden sm:block">
-            <input type="text" placeholder="🔍 Search..." class="search-bar bg-[var(--icon-bg-color)] text-[var(--text-color)] border-none p-2 rounded-full transition-width duration-300 focus:outline-none">
-        </div>
-        <div class="flex items-center">
-            <a href="notifications.html" class="text-[var(--text-color)] mr-4 icon">
-                <i class="fas fa-bell text-xl sm:text-2xl"></i>
-            </a>
-            <a href="messages.html" class="text-[var(--text-color)] mr-4 icon">
-                <i class="fas fa-comments text-xl sm:text-2xl"></i>
-            </a>
-            <a href="profile.html" class="text-[var(--text-color)] icon">
-                <i class="fas fa-user text-xl sm:text-2xl"></i>
-            </a>
-        </div>
-    </div>
-
-    <!-- Mobile Search Bar -->
-    <div class="block sm:hidden w-full px-4 mt-16">
-        <input type="text" placeholder="🔍 Search..." class="search-bar bg-[var(--icon-bg-color)] text-[var(--text-color)] border-none p-2 rounded-full w-full transition-width duration-300 focus:outline-none">
-    </div>
-
-    <!-- Breadcrumb Navigation -->
-    <nav class="breadcrumb mt-16">
-        <a href="home.html">Home</a>
-        <span>/</span>
-        <a href="discover.html">Discover</a>
+  </head>
+  <body>
+    <!-- Header Section -->
+    <header class="sticky-header flex justify-between items-center h-16 px-4">
+      <div class="flex items-center">
+        <a class="text-[var(--text-color)] mr-4 flex items-center" href="home.html">
+          <span class="logo-text ml-2">
+            TruthWeb
+          </span>
+        </a>
+      </div>
+      <div class="flex items-center">
+        <a class="text-[var(--text-color)] mr-4 icon" href="notifications.html">
+          <i class="fas fa-bell text-xl sm:text-2xl"></i>
+        </a>
+        <a class="text-[var(--text-color)] mr-4 icon" href="messages.html">
+          <i class="fas fa-comments text-xl sm:text-2xl"></i>
+        </a>
+        <a class="text-[var(--text-color)] icon" href="profile.html">
+          <i class="fas fa-user text-xl sm:text-2xl"></i>
+        </a>
+      </div>
+    </header>
+    <!-- Navigation Section -->
+    <nav class="bg-[var(--primary-color)] py-4">
+      <ul class="flex flex-wrap justify-center space-x-4">
+        <li class="nav-item">
+          <a class="text-[var(--text-color)] hover:text-[var(--highlight-color)]" href="index.html">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="text-[var(--text-color)] hover:text-[var(--highlight-color)]" href="discover.html" id="openModalButton">Discover</a>
+        </li>
+        <li class="nav-item">
+          <a class="text-[var(--text-color)] hover:text-[var(--highlight-color)]" href="#services">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="text-[var(--text-color)] hover:text-[var(--highlight-color)]" href="#contact">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a class="text-[var(--text-color)] hover:text-[var(--highlight-color)]" href="#policy">Policy</a>
+        </li>
+        <li class="nav-item">
+          <button class="text-[var(--text-color)] hover:text-[var(--highlight-color)]" id="openMoreModalButton">More</button>
+        </li>
+      </ul>
     </nav>
-
-    <div class="text-center fade-in mb-12 mt-16">
-        <h1 class="text-2xl font-bold mb-2">Discover 🌐</h1>
-        <h1 class="text-xl font-bold mb-8">Welcome to Reimagine Truth</h1>
-        <div class="grid grid-cols-3 gap-4 sm:gap-6">
-            <div class="flex flex-col items-center bounce-in">
-                <a href="index.html" class="icon-container bg-[var(--icon-bg-color)] p-3 sm:p-4 rounded-lg border-2 border-[var(--border-color)] icon">
-                    <i class="fas fa-house-chimney text-3xl sm:text-4xl text-[var(--text-color)]"></i>
-                </a>
-                <p class="mt-2 text-sm sm:text-base">Home</p>
-            </div>
-            <div class="flex flex-col items-center bounce-in">
-                <a href="wiki.html" class="icon-container bg-[var(--icon-bg-color)] p-3 sm:p-4 rounded-lg border-2 border-[var(--border-color)] icon">
-                    <i class="fas fa-book-open text-3xl sm:text-4xl text-[var(--text-color)]"></i>
-                </a>
-                <p class="mt-2 text-sm sm:text-base">Wiki</p>
-            </div>
-            <div class="flex flex-col items-center bounce-in">
-                <a href="whitepaper.html" class="icon-container bg-[var(--icon-bg-color)] p-3 sm:p-4 rounded-lg border-2 border-[var(--border-color)] icon">
-                    <i class="fas fa-file-alt text-3xl sm:text-4xl text-[var(--text-color)]"></i>
-                </a>
-                <p class="mt-2 text-sm sm:text-base">Whitepaper</p>
-            </div>
-            <div class="flex flex-col items-center bounce-in">
-                <a href="rto-token.html" class="icon-container bg-[var(--icon-bg-color)] p-3 sm:p-4 rounded-lg border-2 border-[var(--border-color)] icon">
-                    <i class="fas fa-coins text-3xl sm:text-4xl text-[var(--text-color)]"></i>
-                </a>
-                <p class="mt-2 text-sm sm:text-base">RTO Token</p>
-            </div>
-            <div class="flex flex-col items-center bounce-in">
-                <a href="profile.html" class="icon-container bg-[var(--icon-bg-color)] p-3 sm:p-4 rounded-lg border-2 border-[var(--border-color)] icon">
-                    <i class="fas fa-user-circle text-3xl sm:text-4xl text-[var(--text-color)]"></i>
-                </a>
-                <p class="mt-2 text-sm sm:text-base">Profile</p>
-            </div>
-            <div class="flex flex-col items-center bounce-in">
-                <a href="listing.html" class="icon-container bg-[var(--icon-bg-color)] p-3 sm:p-4 rounded-lg border-2 border-[var(--border-color)] icon">
-                    <i class="fas fa-list-alt text-3xl sm:text-4xl text-[var(--text-color)]"></i>
-                </a>
-                <p class="mt-2 text-sm sm:text-base">Listing</p>
-            </div>
+    <!-- Hero Section -->
+  <div class="hero">
+   <h1 class="glow-text fade-in">
+    TruthWeb
+   </h1>
+   <p class="text-xl mt-4 text-center fade-in" style="animation-delay: 0.5s;">
+    Step into the realm of Reimagine Truth
+   </p>
+   <a class="btn mt-6 fade-in" href="#explore" style="animation-delay: 1s;">
+    Explore the Mystery
+   </a>
+  </div>
+  <!-- Modal -->
+  <div class="modal" id="infoModal">
+   <div class="modal-content">
+    <span class="close" id="closeModalButton">
+     ×
+    </span>
+    <h2>
+     More Options
+    </h2>
+    <ul class="mt-4">
+     <li class="mb-2">
+      <a class="text-[var(--primary-color)] hover:text-[var(--highlight-color)]" href="#faq">
+       FAQ
+      </a>
+     </li>
+     <li class="mb-2">
+      <a class="text-[var(--primary-color)] hover:text-[var(--highlight-color)]" href="#support">
+       Support
+      </a>
+     </li>
+     <li class="mb-2">
+      <a class="text-[var(--primary-color)] hover:text-[var(--highlight-color)]" href="#blog">
+       Blog
+      </a>
+     </li>
+     <li class="mb-2">
+      <a class="text-[var(--primary-color)] hover:text-[var(--highlight-color)]" href="#careers">
+       Careers
+      </a>
+     </li>
+    </ul>
+   </div>
+  </div>
+      <!-- Footer Section -->
+    <footer class="bg-[var(--primary-color)] py-8">
+      <div class="container mx-auto text-center">
+        <div class="mb-4">
+          <a class="text-[var(--text-color)] mx-2" href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a class="text-[var(--text-color)] mx-2" href="https://www.x.com" target="_blank"><i class="fab fa-twitter"></i></a>
+          <a class="text-[var(--text-color)] mx-2" href="https://www.telegram.com" target="_blank"><i class="fab fa-telegram"></i></a>
+          <a class="text-[var(--text-color)] mx-2" href="https://www.youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
         </div>
-    </div>
-
-    <!-- Footer Navigation -->
-    <div class="fixed bottom-0 left-0 right-0 bg-[var(--bg-color)] text-[var(--text-color)] transition-colors duration-300 dark-mode">
-        <div class="flex justify-around items-center h-16">
-            <a href="home.html" class="relative icon-container text-[var(--text-color)] icon">
-                <i class="fas fa-home text-xl sm:text-2xl"></i>
-            </a>
-            <a href="search.html" class="icon-container text-[var(--text-color)] icon">
-                <i class="fas fa-search text-xl sm:text-2xl"></i>
-            </a>
-            <a href="edit.html" class="icon-container text-[var(--text-color)] icon">
-                <i class="fas fa-edit text-xl sm:text-2xl"></i>
-            </a>
-            <a href="users.html" class="icon-container text-[var(--text-color)] icon">
-                <i class="fas fa-users text-xl sm:text-2xl"></i>
-            </a>
-            <a href="notifications.html" class="icon-container text-[var(--text-color)] icon">
-                <i class="fas fa-bell text-xl sm:text-2xl"></i>
-            </a>
-            <a href="messages.html" class="icon-container text-[var(--text-color)] icon">
-                <i class="fas fa-envelope text-xl sm:text-2xl"></i>
-            </a>
-            <button id="themeToggleButton" class="icon-container text-[var(--text-color)] icon">
-                <i id="themeIcon" class="fas fa-moon text-xl sm:text-2xl"></i>
-            </button>
-        </div>
-    </div>
+        <p class="text-[var(--text-color)] mb-4">© 2024 TruthWeb. All rights reserved.</p>
+        <p class="text-[var(--text-color)]">Designed by Reimagine Truth Organization</p>
+      </div>
+    </footer>
 
     <!-- Modal -->
-    <div id="infoModal" class="modal">
-        <div class="modal-content">
-            <span class="close" id="closeModalButton">&times;</span>
-            <h2>About TruthWeb</h2>
-            <p>TruthWeb is a cutting-edge platform dedicated to delivering accurate, real-time information to users worldwide. 📚 Our mission is to ensure that everyone has seamless access to verified and up-to-date truths, fostering a more informed and connected global community. 🌐</p>
+    <div id="modal" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">
+      <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-xl font-semibold text-black">More Options</h2>
+          <button id="closeModal" class="text-gray-700 hover:text-red-500">
+            <i class="fas fa-times"></i>
+          </button>
         </div>
-    </div>
+        <ul class="space-y-4">
+          <li><a href="wiki.html" class="text-gray-700 hover:text-blue-500">Wiki</a></li>
+          <li><a href="whitepaper.html" class="text-gray-700 hover:text-blue-500">Whitepaper</a></li>
+          <li><a href="airdrop.html" class="text-gray-700 hover:text-blue-500">Airdrop</a></li>
+          <li><a href="listing.html" class="text-gray-700 hover:text-blue-500">Listing</a></li>
+          <li><a href="rto-token.html" class="text-gray-700 hover:text-blue-500">RTO Token</a></li>
 
-    <!-- Left Drawer (Main Navigation) -->
-    <div id="menuDrawer" class="fixed top-0 left-0 h-full w-64 bg-[var(--bg-color)] text-[var(--text-color)] drawer transition-colors duration-300 dark-mode">
-        <div class="p-4">
-            <button id="closeButton" class="text-[var(--text-color)] mb-4 icon">
-                <i class="fas fa-times text-xl sm:text-2xl"></i>
-            </button>
-            <ul>
-                <li class="mb-2"><a href="home.html" class="text-[var(--text-color)] p-2 block rounded menu-item flex items-center icon"><i class="fas fa-home mr-2"></i> Home</a></li>
-                <li class="mb-2"><a href="discover.html" class="text-[var(--text-color)] p-2 block rounded menu-item flex items-center icon"><i class="fas fa-globe mr-2"></i> Discover</a></li>
-                <li class="mb-2"><a href="newsfeed.html" class="text-[var(--text-color)] p-2 block rounded menu-item flex items-center icon"><i class="fas fa-bullhorn mr-2"></i> News Feed</a></li>
-                <li class="mb-2"><a href="groups.html" class="text-[var(--text-color)] p-2 block rounded menu-item flex items-center icon"><i class="fas fa-users mr-2"></i> Groups</a></li>
-                <li class="mb-2"><a href="messages.html" class="text-[var(--text-color)] p-2 block rounded menu-item flex items-center icon"><i class="fas fa-envelope mr-2"></i> Messages</a></li>
-                <li class="mb-2"><a href="analytics.html" class="text-[var(--text-color)] p-2 block rounded menu-item flex items-center icon"><i class="fas fa-chart-bar mr-2"></i> Analytics</a></li>
-                <li class="mb-2"><a href="settings.html" class="text-[var(--text-color)] p-2 block rounded menu-item flex items-center icon"><i class="fas fa-cog mr-2"></i> Settings</a></li>
-                <li class="mb-2"><a href="logout.html" class="text-[var(--text-color)] p-2 block rounded menu-item flex items-center icon"><i class="fas fa-sign-out-alt mr-2"></i> Logout</a></li>
-                <li class="mb-2">
-                    <button id="openModalButton" class="text-[var(--text-color)] p-2 block rounded menu-item w-full text-left flex items-center icon">
-                        <i class="fas fa-info-circle mr-2"></i> Info
-                    </button>
-                </li>
-            </ul>
-        </div>
+          
+        </ul>
+      </div>
     </div>
 
     <script>
-        const menuButton = document.getElementById('menuButton');
-        const closeButton = document.getElementById('closeButton');
-        const menuDrawer = document.getElementById('menuDrawer');
-        const themeToggleButton = document.getElementById('themeToggleButton');
-        const themeIcon = document.getElementById('themeIcon');
-        const body = document.body;
+      document.getElementById('openModalButton').addEventListener('click', function(event) {
+        event.preventDefault();
+        document.getElementById('modal').classList.remove('hidden');
+      });
 
-        const openModalButton = document.getElementById('openModalButton');
-        const closeModalButton = document.getElementById('closeModalButton');
-        const infoModal = document.getElementById('infoModal');
+      document.getElementById('closeModal').addEventListener('click', function() {
+        document.getElementById('modal').classList.add('hidden');
+      });
 
-        menuButton.addEventListener('click', () => {
-            menuDrawer.classList.add('drawer-open');
-        });
-
-        closeButton.addEventListener('click', () => {
-            menuDrawer.classList.remove('drawer-open');
-        });
-
-        themeToggleButton.addEventListener('click', () => {
-            if (body.classList.contains('dark-mode')) {
-                body.classList.remove('dark-mode');
-                body.classList.add('light-mode');
-                themeIcon.classList.remove('fa-moon');
-                themeIcon.classList.add('fa-sun');
-            } else {
-                body.classList.remove('light-mode');
-                body.classList.add('dark-mode');
-                themeIcon.classList.remove('fa-sun');
-                themeIcon.classList.add('fa-moon');
-            }
-        });
-
-        openModalButton.addEventListener('click', () => {
-            infoModal.style.display = 'flex';
-        });
-
-        closeModalButton.addEventListener('click', () => {
-            infoModal.style.display = 'none';
-        });
-
-        window.addEventListener('click', (event) => {
-            if (event.target == infoModal) {
-                infoModal.style.display = 'none';
-            }
-        });
-
-        // Add smooth navigation to buttons
-        document.querySelectorAll('a, button').forEach(element => {
-            element.addEventListener('click', (event) => {
-                const href = element.getAttribute('href');
-                if (href) {
-                    event.preventDefault();
-                    setTimeout(() => {
-                        window.location.href = href;
-                    }, 300); // Delay to allow smooth transition
-                }
-            });
-        });
+      window.addEventListener('click', function(event) {
+        if (event.target == document.getElementById('modal')) {
+          document.getElementById('modal').classList.add('hidden');
+        }
+      });
     </script>
-</body>
+  </body>
 </html>
